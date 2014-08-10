@@ -1,0 +1,30 @@
+#team-selection {
+  list-style: none;
+  float: left;
+  width: 78%;
+}
+
+#team-selection li {
+  font-size: 0.85em;
+  width: 250px;
+  float: left;
+  line-height: 1.7em;
+  letter-spacing: 2px;
+}
+
+#team-selection li a {
+  padding: 0px;
+  color: #000000;
+}
+
+#team-selection li a:hover {
+  background-color: #f0f0f0;
+  color: #000000;
+}
+
+
+#team-info {
+  margin-top: 15px;
+  float: right;
+  width: 22%;
+}

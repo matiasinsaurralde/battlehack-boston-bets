@@ -1,0 +1,2 @@
+require './bhb'
+run BhbApp
