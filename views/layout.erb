@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
   <link rel="stylesheet" href="http://purecss.io/combo/1.16.12?/css/main-grid.css&/css/main.css&/css/home.css&/css/rainbow/baby-blue.css">
   <link rel="stylesheet" href="/stylesheets/application.css">
+  <link rel="stylesheet" href="/stylesheets/animate.css">
   <script src="/javascripts/jquery.js"></script>
   <script src="/javascripts/jquery.cookie.js"></script>
   <script src="/javascripts/application.js"></script>
@@ -25,7 +26,32 @@
 
     <div class="hero">
       <div class="hero-titles">
-        <h2 class="hero-tagline">Who's going to get the big prize? <br /><small>(World Finals @Sillicon Valley)</small></h2>
+        <h2 class="hero-tagline animated bounceInDown">Who's going to win the big prize?<br /><small id="extra"> You may try your luck with 2 projects!</small></h2>
+        <form id="bet-form" style="display: none;" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+          <input type="hidden" name="cmd" value="_xclick">
+          <input type="hidden" name="business" value="matias-facilitator@insaurral.de">
+          <input type="hidden" name="item_name" value="BattleHack Bet">
+          <input type="hidden" name="paymentaction" value="authorization">
+          <!--<input type="hidden" name="item_number" value="MEM32507725">-->
+          <!--<input type="hidden" name="tax" value="1">-->
+          <!-- <input type="hidden" name="quantity" value="1"> -->
+          <input type="hidden" name="no_note" value="1">
+          <input type="hidden" name="currency_code" value="USD">
+          <select name="amount">
+            <option value="1">1 $</option>
+            <option value="3">3 $</option>
+            <option value="5">5 $</option>
+            <option value="10">10 $</option>
+            <option value="20">20 $</option>
+            <option value="30">30 $</option>
+            <option value="50">50 $</option>
+          </select>
+          <!--<input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">-->
+          <input type="hidden" name="return" value="http://battlehack.effectivego.com:5000/thanks">
+          <input type="hidden" name="cancel_return" value="http://battlehack.effectivego.com:5000/">
+          <input type="hidden" name="notify_url" value="http://battlehack.effectivego.com:5000/notify">
+          <input type="submit" value="Let's go" />
+        </form>
         <%= erb :team_selection %>
       </div>
     </div>

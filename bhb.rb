@@ -58,4 +58,9 @@ class BhbApp < Sinatra::Base
   post '/login' do
   end
 
+  post '/notify' do
+    p "paypal notify!"
+    p params; p "-"
+  end
+
 end

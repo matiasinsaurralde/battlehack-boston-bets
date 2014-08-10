@@ -1,10 +1,10 @@
-<ul id="team-selection">
+<ul id="team-selection" class="bounceInLeft animated">
   <% TEAMS.each do |t| %>
   <li><a href="#" data-id="<%= t[0] %>" data-team-name="<%= t[1] %>" data-members="<%= t[3] %>" data-project-name="<%= t[2] %>"><%= t[2] %></a></li>
   <% end %>
 </ul>
 
-<div id="team-info">
+<div id="team-info" class="bounceInRight animated">
   <p><b>Team:</b> <span id="selected-team-name">?</span></p>
   <p><b>Project:</b> <span id="selected-project-name">?</span></p>
   <p><b>Hackers:</b></p> <span id="selected-team-members">?</span></p>
