@@ -1,6 +1,7 @@
 $(document).ready( function() {
 
   window.selectedCount = 0;
+  window.selectedProjects = [];
 
   function displayTeamInfo( e ) {
     $('#selected-team-name').text( $(e).data('team-name') );
@@ -17,6 +18,7 @@ $(document).ready( function() {
       //$('#team-selection li a').css('font-weight', '');
       $(this).css('font-weight', 'bold');
       displayTeamInfo( this );
+      selectedProjects.push( $(this).data('id') );
       selectedCount++;
       e.preventDefault();
     };
@@ -32,6 +34,12 @@ $(document).ready( function() {
       $('#bet-form').css('display', 'block');
       $('#bet-form').addClass('animated bounceInUp');
     };
+  });
+
+  $('form').on('submit', function(e) {
+    //$('input').attr('disabled', 'true');
+    $.ajax( { url: "/bet", async: false, type: 'post', data: { 'projects': window.selectedProjects.join(';'), 'id': $('#bet-field').val() }}).done( function(data) {
+    });
   });
 });
 

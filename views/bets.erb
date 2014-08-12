@@ -1,0 +1,43 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+  <link rel="stylesheet" href="http://purecss.io/combo/1.16.12?/css/main-grid.css&/css/main.css&/css/home.css&/css/rainbow/baby-blue.css">
+  <link rel="stylesheet" href="/stylesheets/application.css">
+  <link rel="stylesheet" href="/stylesheets/animate.css">
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/jquery.cookie.js"></script>
+  <script src="/javascripts/application.js"></script>
+  <title>BattleHack Bet</title>
+</head>
+<body>
+
+  <div id="layout">
+    <div id="menu">
+      <div class="pure-menu pure-menu-open">
+        <a class="pure-menu-heading" href="/">Battle<br/>Hack<br />Bet</a>
+          <ul>
+            <li class=" ">
+              <a href="/bets">Latest bets</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-titles">
+        <h2 class="hero-tagline animated bounceInDown">Who's going to win the big prize?<br /><small id="extra"> Latest bets</small></h2>
+  <p>The person with the best guess will get the total amount, we will find out how to distribute it in case of deadlock.</p>
+        <ul style="text-align: left; list-style: none;">
+        <% @bets.each do |b|; b = b.split('.').last %>
+          <% if !$redis.keys("#{b}.name").empty? %>
+          <li><b><%= b %></b>, <%= $redis.get("#{b}.name") %>, <%= $redis.get("#{b}.amount") %> $ for projects <%= $redis.lrange("bet.#{b}", 0, 2).join(", ") %></li>
+          <% end %>
+        <% end %>        
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

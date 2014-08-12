@@ -1,5 +1,9 @@
 require 'rubygems'
 require 'sinatra'
+require 'digest/sha1'
+require 'redis'
+
+$redis = Redis.new()
 
 TEAMS = [[377, "ASB", "ASB", "Huy Le"],
 [355, "Battlestar Hacktacica", "PenPal", "Austin Stapley, Bobby Brennan, Saurya Velagapudi"],
@@ -58,9 +62,30 @@ class BhbApp < Sinatra::Base
   post '/login' do
   end
 
+  get '/bets' do
+    @bets = $redis.keys('bet.*')
+    erb :bets, layout: false
+  end
+
+  post '/bets' do
+    redirect '/bets'
+  end
+
+  post '/bet' do
+    bet_id, project_ids = params[:id], params[:projects].split(";").map { |e| e.to_i }
+    project_ids.each do |n|
+      $redis.lpush("bet.#{bet_id}", n)
+    end
+    ''
+  end
+
   post '/notify' do
     p "paypal notify!"
     p params; p "-"
+    first_name, last_name, email, k = params['first_name'], params['last_name'], params['payer_email'], params['custom']
+    $redis.set( "#{k}.name", [first_name, last_name].join(' ') )
+    $redis.set( "#{k}.email", email )
+    $redis.set( "#{k}.amount", params['auth_amount'] )
   end
 
 end

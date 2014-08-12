@@ -18,8 +18,9 @@
         <a class="pure-menu-heading" href="/">Battle<br/>Hack<br />Bet</a>
           <ul>
             <li class=" ">
-              <a href="/bets">Check the list</a>
+              <a href="/bets">Latest bets</a>
             </li>
+            <li class="ad" style="font-size: 0.9em; margin-left: 10px; margin-right: 10px; background-color: #f0f0f0; padding: 10px; margin-top: 20px;">This is a side experiment I've been hacking on, I'm part of turtle group.<br />I'm on <a href="https://twitter.com/matias_baruch">Twitter</a>.<br />The idea is to collect money until the awards ceremony and then give it out to the person who did the best "prediction".</li>
         </ul>
       </div>
     </div>
@@ -27,14 +28,11 @@
     <div class="hero">
       <div class="hero-titles">
         <h2 class="hero-tagline animated bounceInDown">Who's going to win the big prize?<br /><small id="extra"> You may try your luck with 2 projects!</small></h2>
-        <form id="bet-form" style="display: none;" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+        <form id="bet-form" style="display: none;" action="https://www.paypal.com/cgi-bin/webscr" method="post">
           <input type="hidden" name="cmd" value="_xclick">
-          <input type="hidden" name="business" value="matias-facilitator@insaurral.de">
+          <input type="hidden" name="business" value="matias@insaurral.de">
           <input type="hidden" name="item_name" value="BattleHack Bet">
           <input type="hidden" name="paymentaction" value="authorization">
-          <!--<input type="hidden" name="item_number" value="MEM32507725">-->
-          <!--<input type="hidden" name="tax" value="1">-->
-          <!-- <input type="hidden" name="quantity" value="1"> -->
           <input type="hidden" name="no_note" value="1">
           <input type="hidden" name="currency_code" value="USD">
           <select name="amount">
@@ -47,9 +45,10 @@
             <option value="50">50 $</option>
           </select>
           <!--<input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">-->
-          <input type="hidden" name="return" value="http://battlehack.effectivego.com:5000/thanks">
+          <input type="hidden" name="return" value="http://battlehack.effectivego.com:5000/bets">
           <input type="hidden" name="cancel_return" value="http://battlehack.effectivego.com:5000/">
           <input type="hidden" name="notify_url" value="http://battlehack.effectivego.com:5000/notify">
+          <input id="bet-field" type="hidden" name="custom" value="<%= Digest::SHA1.hexdigest(rand(99999999).to_s)[0,10]  %>">
           <input type="submit" value="Let's go" />
         </form>
         <%= erb :team_selection %>
